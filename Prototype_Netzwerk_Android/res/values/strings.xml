@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Prototype</string>
+    <string name="connect">Verbinden</string>
+    <string name="senden">Senden</string>
+    <string name="action_settings">Settings</string>
+    <string name="ip">IP-Adresse</string>
+    <string name="port">Port</string>
+
+</resources>
