@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Prototype_QR-Code_Android</string>
+    <string name="startScanning">QR-Code scannen!</string>
+
+</resources>
