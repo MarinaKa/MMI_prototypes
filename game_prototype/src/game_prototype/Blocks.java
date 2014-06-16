@@ -7,8 +7,7 @@ public class Blocks {
 	private int xSize;
 	private int ySize;
 	private int yPos;
-	private int blockHeight;
-	private int f;
+	private int f; // ySize/f == höhe der blöcke
 	
 	private boolean[][] blocks;
 
@@ -34,13 +33,13 @@ public class Blocks {
 	
 	public boolean checkHit(int ballX, int ballY) {
 		
-		if(ballY < yPos || ballY > yPos + blockHeight * height)
+		if(ballY < yPos || ballY > yPos + ySize/f)
 		{
 			return false;
 		}
 		
 		int xLoc = Math.floorDiv(ballX, xSize/width);
-		int yLoc = Math.floorDiv(ballY-yPos, ySize/(height*f));
+		int yLoc = Math.floorDiv(ballY-yPos, (ySize/f)/height)-1;
 		
 		if(blocks[yLoc][xLoc])
 		{
@@ -49,14 +48,6 @@ public class Blocks {
 		}
 		
 		return false;
-	}
-	
-	public int getWidth() {
-		return width;
-	}
-	
-	public int getHeight() {
-		return height;
 	}
 	
 	public boolean[][]	getBlocksPattern() {

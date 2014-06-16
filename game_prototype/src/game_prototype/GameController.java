@@ -1,16 +1,18 @@
 package game_prototype;
 
 import java.io.IOException;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
 public class GameController extends JPanel{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int xSize;
 	private int ySize;
@@ -19,7 +21,6 @@ public class GameController extends JPanel{
 	private Paddle paddle;
 	private Ball ball;
 	private Blocks blocks;
-	private PaddleListener pListener;
 	
 	private Graphics2D g2;
 	private Timer myTimer;	
@@ -28,6 +29,8 @@ public class GameController extends JPanel{
 	private String yellow = "#f0de07";
 	private String navy = "#10162e";
 	private String greygreen = "#8ccdb9";
+	
+	private boolean paused;
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -43,48 +46,66 @@ public class GameController extends JPanel{
 	public void startGame()
 	{
 		paddle = new Paddle(xSize, ySize);
-		ball = new Ball(xSize+ySize/200);
-		blocks = new Blocks(4, 20, xSize, ySize);
+		ball = new Ball((xSize+ySize)/200, xSize/2, ySize/2);
+		blocks = new Blocks(30, 8, xSize, ySize);
 		gameF = new GameFrame(xSize,ySize,this);
-		pListener = new PaddleListener(paddle);
 		
-		myTimer = new Timer();
-		myTimer.scheduleAtFixedRate(new ScheduleTask(), 1500, 500);
+		gameF.addKeyListener(new PaddleListener(this, paddle));
+		
+		paused = true;
 	}
 	
+	public void startPause() {
+		
+		if(paused) {
+			myTimer = new Timer();
+			myTimer.scheduleAtFixedRate(new ScheduleTask(), 0, 30);
+			paused = false;
+		}
+		else {
+			myTimer.cancel();
+			paused = true;
+		}
+	}
 	// GameState
 	
 	private void checkGameState() {
-		checkGameOver();
+		ball.move();
 		checkPaddleHit();
 		checkBlocksHit();
 		checkEdgeHit();
 	}
 	
-	private void checkGameOver() {
-		if(ball.getYPos() + ball.getRadius() >= ySize) {
-			// game over
-			// drawGameOver();
-			myTimer.cancel();
-			myTimer.purge();
-		}
+	public void GameOver() {
+		// drawGameOver();
+		myTimer.cancel();
+		myTimer.purge();
 	}
 	
 	private void checkPaddleHit() {
-		if(paddle.checkHit(ball.getXPos(), ball.getYPos())) {
-			// change ball direction
+		if(paddle.checkHit(ball.getXPos(), ball.getYPos(), ball.getRadius())) {
+			ball.changeDirection(true, "horizontal");
 		}
 	}
 	
 	private void checkBlocksHit() {
 		if(blocks.checkHit(ball.getXPos(), ball.getYPos())) {
-			// change ball direction
+			ball.changeDirection(false, "horizontal");
 		}
 	}
 	
 	private void checkEdgeHit() {
-		if(ball.getXPos() < ball.getRadius() || ball.getXPos() > xSize-ball.getRadius() || ball.getYPos() < ball.getRadius()){
-			// change ball direction
+		if(ball.getXPos() <= 0 || ball.getXPos() > xSize-2*ball.getRadius()-15){
+			ball.changeDirection(false, "vertical");
+		}
+		
+		if(ball.getYPos() <= 0) { 
+			ball.changeDirection(false, "horizontal");
+		}
+		
+		else if(ball.getYPos() + 2*ball.getRadius() >= ySize)
+		{
+			GameOver();
 		}
 	}
 	
@@ -132,7 +153,11 @@ public class GameController extends JPanel{
 	}
 	
 	private void drawBall() {
-		
+		g2.setColor(Color.decode(yellow));
+		int[] args = ball.getBall();
+
+		Ellipse2D.Double circle = new Ellipse2D.Double(args[0],args[1],args[2]*2,args[2]*2);
+		g2.fill(circle);
 	}
 	
 	// Timer

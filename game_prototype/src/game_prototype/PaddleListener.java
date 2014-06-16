@@ -1,26 +1,36 @@
 package game_prototype;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class PaddleListener implements KeyListener {
-
-	public PaddleListener(Paddle paddle) {
-		
-	}
+class PaddleListener extends KeyAdapter {
 	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("Key Pressed: "+ e.getKeyCode());
-		
+	private GameController c;
+	private Paddle p;
+
+	public PaddleListener(GameController c, Paddle p) {
+		this.p = p;
+		this.c = c;
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-	}
 
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-	}	
-
+    public void keyPressed(KeyEvent e) {
+    	
+    	int code = e.getKeyCode();
+    	
+    	switch(code) {
+    	case 37: // links
+    		p.changePaddlePosition(-10);
+    		break;
+    	case 39: // rechts
+    		p.changePaddlePosition(10);
+    		break;
+    	case 27: // esc
+    		c.GameOver();
+    		break;
+    	case 32:
+    		c.startPause();
+    	}
+    }
 }

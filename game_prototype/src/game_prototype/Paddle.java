@@ -13,7 +13,7 @@ public class Paddle {
 		xSizeFrame = xSize;
 		xSizePaddle = xSize/10;
 		ySizePaddle = ySize/100;
-		xPos = xSize/2;
+		xPos = (xSize-xSizePaddle)/2;
 		yPos = ySize - ySize/6;
 	}
 	
@@ -21,12 +21,12 @@ public class Paddle {
 	{
 		if(change < 0 && xPos > 0)
 		{
-			xPos -= xSizeFrame/1000;
+			xPos -= xSizeFrame/50;
 		}
 		
 		else if(change > 0 && xPos < xSizeFrame - xSizePaddle)
 		{
-			xPos += xSizeFrame/1000;
+			xPos += xSizeFrame/50;
 		}
 	}
 	
@@ -36,9 +36,9 @@ public class Paddle {
 		return args;
 	}
 	
-	public boolean checkHit(int ballX, int ballY)
+	public boolean checkHit(int ballX, int ballY, int r)
 	{
-		if(ballY < xPos && ballY > yPos + ySizePaddle) {
+		if(ballY+2*r < yPos || ballY+2*r > yPos + ySizePaddle) {
 			return false;
 		}
 		
