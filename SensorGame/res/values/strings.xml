@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SensorGame</string>
+    <string name="scanQRCode">QR-Code scannen!</string>
+    <string name="manual">IP und Port manuell eingeben</string>
+    <string name="title_activity_manual">Bitte gib die IP-Adresse und den Port des PCs mit dem du dich verbinden möchtest ein.</string>
+    <string name="ip_hint">IP</string>
+    <string name="port_hint">Port</string>
+    <string name="connect_manual">Verbinden</string>
+    <string name="title_activity_controller">ControllerActivity</string>
+    <string name="toast_invalid_data">IP-Adresse oder Port ungültig!</string>
+    <string name="left_arrow">links</string>
+    <string name="right_arrow">rechts</string>
+    <string name="controller_description">Neige dein Smartphone nach links oder rechts um das Brett zu bewegen.</string>
+    <string name="toast_connection_error">Leider konnte keine Verbindung zu diesem PC aufgebaut werden. :(</string>
+    <string name="toast_send_error">Die Verbindung wurde leider unterbrochen. :(</string>
+
+</resources>
