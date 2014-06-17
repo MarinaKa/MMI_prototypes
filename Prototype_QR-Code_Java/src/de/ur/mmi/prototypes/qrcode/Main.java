@@ -12,7 +12,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class Main {
 
 	public static void main(String[] args) {
-		String ip = "123.123.123.123";
+		String ip = "192.168.178.27";
 		int port = 8000;
 		
 		QRCodeWriter writer = new QRCodeWriter();
