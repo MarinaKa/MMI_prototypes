@@ -38,8 +38,14 @@ public class Blocks {
 			return false;
 		}
 		
-		int xLoc = Math.floorDiv(ballX, xSize/width);
-		int yLoc = Math.floorDiv(ballY-yPos, (ySize/f)/height)-1;
+		float blockWidth = xSize/width;
+		float x = ballX/blockWidth;
+		
+		float blockHeight = (ySize/f)/height;
+		float y = (ballY-yPos)/blockHeight;
+		
+		int xLoc = (int) Math.floor(x);
+		int yLoc = (int) Math.floor(y)-1;
 		
 		if(blocks[yLoc][xLoc])
 		{

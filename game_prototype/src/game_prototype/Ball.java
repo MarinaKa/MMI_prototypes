@@ -22,8 +22,6 @@ public class Ball {
 	public void move() {
 		xPos += xDir;
 		yPos += yDir;
-		
-		System.out.println("Dir: " + xDir + " " + yDir);
 	}
 	
 	public void changeDirection(boolean hit, String side)
@@ -48,8 +46,8 @@ public class Ball {
 	private void setAngle() {
 		int xFlag = getFlag(xDir);
 		int yFlag = getFlag(yDir);
-		xDir = (int) Math.ceil(Math.random() * 3 + 2) * xFlag;
-		yDir = (int) Math.ceil(Math.random() * 3 + 2) * yFlag;
+		xDir = (int) Math.ceil(Math.random() * 4 + 5) * xFlag;
+		yDir = (int) Math.ceil(Math.random() * 4 + 5) * yFlag;
 	}
 	
 	private int getFlag(int n) {

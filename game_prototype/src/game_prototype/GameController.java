@@ -35,27 +35,32 @@ public class GameController extends JPanel{
 	
 	public static void main(String[] args) throws IOException
 	{
-		GameController c = new GameController(800, 600);
+		GameController c = new GameController();
 		new StartFrame(c);
+
 	}
 	
-	public GameController(int x, int y) {
-		xSize = x;
-		ySize = y;
+	public GameController() {
+
 	}
 	
 	public void startGame()
 	{
+		gameF = new GameFrame(this);
+		
+		xSize = gameF.getWidth() - gameF.getInsets().right - gameF.getInsets().left;
+		ySize = gameF.getHeight() - gameF.getInsets().top - gameF.getInsets().bottom;
+			
 		paddle = new Paddle(xSize, ySize);
 		ball = new Ball((xSize+ySize)/200, xSize/2, ySize/2);
-		blocks = new Blocks(30, 8, xSize, ySize);
-		gameF = new GameFrame(xSize,ySize,this);
+		blocks = new Blocks(30, 5, xSize, ySize);
 		
 		gameF.addKeyListener(new PaddleListener(this, paddle));
 		
 		paused = true;
+		startPause();
 	}
-	
+	 
 	public Paddle getPaddle() {
 		return paddle;
 	}
@@ -67,7 +72,7 @@ public class GameController extends JPanel{
 		
 		if(paused) {
 			myTimer = new Timer();
-			myTimer.scheduleAtFixedRate(new ScheduleTask(), 0, 30);
+			myTimer.scheduleAtFixedRate(new ScheduleTask(), 0, 50);
 			paused = false;
 		}
 		else {
