@@ -17,7 +17,8 @@ public class GameController extends JPanel{
 	private int xSize;
 	private int ySize;
 	
-	private GameFrame gameF;
+	private GameFrame gameF = null;
+
 	private Paddle paddle;
 	private Ball ball;
 	private Blocks blocks;
@@ -55,6 +56,13 @@ public class GameController extends JPanel{
 		paused = true;
 	}
 	
+	public Paddle getPaddle() {
+		return paddle;
+	}
+	public GameFrame getGameF() {
+		return gameF;
+	}
+
 	public void startPause() {
 		
 		if(paused) {

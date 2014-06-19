@@ -10,27 +10,26 @@ public class CommunicationThread implements Runnable {
 	private Socket clientSocket;
 	private BufferedReader input;
 	private NetworkListener networkListener;
+	private Thread thread;
 
 	public CommunicationThread(Socket clientSocket, NetworkListener networkListener) {
-		
+
 		this.clientSocket = clientSocket;
 		this.networkListener = networkListener;
-		
+
 		try {
 
-			this.input = new BufferedReader(new InputStreamReader(
-					this.clientSocket.getInputStream()));
+			this.input = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			networkListener.onError();
 		}
 	}
 
 	public void run() {
-
-		while (!Thread.currentThread().isInterrupted()) {
-
-			try {
+		try {
+			while (!thread.isInterrupted()) {
 				String read = input.readLine();
 
 				if (read != null) {
@@ -39,11 +38,21 @@ public class CommunicationThread implements Runnable {
 					networkListener.onError();
 					Thread.currentThread().interrupt();
 				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
+		} catch (IOException e) {
+			thread.interrupt();
+			e.printStackTrace();
+			networkListener.onError();
 		}
+	}
+
+	public void start() {
+		thread = new Thread(this);
+		thread.start();
+	}
+
+	public void interrupt() {
+		thread.interrupt();
 	}
 
 }

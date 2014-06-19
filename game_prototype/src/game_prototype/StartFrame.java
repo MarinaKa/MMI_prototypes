@@ -24,6 +24,11 @@ public class StartFrame implements ActionListener {
 
 	private JFrame frame;
 	private GameController c;
+	private ServerThread serverThread;
+
+	public ServerThread getServerThread() {
+		return serverThread;
+	}
 
 	public StartFrame(GameController c) {
 		this.c = c;
@@ -35,8 +40,12 @@ public class StartFrame implements ActionListener {
 		addComponentsToPane(frame);
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
-		Thread serverThread = new Thread(new ServerThread(new NetworkListener(this, c)));
+		serverThread = new ServerThread(new NetworkListener(this, c));
 		serverThread.start();
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
 	private void addComponentsToPane(Container pane) {
@@ -54,6 +63,7 @@ public class StartFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				StartFrame.this.frame.dispose();
+				serverThread.interrupt();
 			}
 		});
 		closeButton.setBackground(Color.decode(c.pink));
