@@ -25,10 +25,10 @@ public class GameController extends JPanel{
 	private Graphics2D g2;
 	private Timer myTimer;	
 	
-	private String pink = "#f50288";
-	private String yellow = "#f0de07";
-	private String navy = "#10162e";
-	private String greygreen = "#8ccdb9";
+	public String pink = "#f50288";
+	public String yellow = "#f0de07";
+	public String navy = "#10162e";
+	public String greygreen = "#8ccdb9";
 	
 	private boolean paused;
 	

@@ -14,11 +14,10 @@ class PaddleListener extends KeyAdapter {
 	}
 
 	@Override
-
     public void keyPressed(KeyEvent e) {
     	
     	int code = e.getKeyCode();
-    	
+
     	switch(code) {
     	case 37: // links
     		p.changePaddlePosition(-10);
