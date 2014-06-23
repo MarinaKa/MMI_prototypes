@@ -102,7 +102,7 @@ public class GameController extends JPanel{
 	}
 	
 	private void checkBlocksHit() {
-		if(blocks.checkHit(ball.getXPos(), ball.getYPos())) {
+		if(blocks.checkHit(ball.getXPos(), ball.getYPos()+gameF.getInsets().top)) {
 			ball.changeDirection(false, "horizontal");
 		}
 	}
@@ -143,9 +143,9 @@ public class GameController extends JPanel{
 		
 		g2.setColor(Color.decode(greygreen));
 		
-		int[] args = blocks.getBlocks(); // width, height, yPos, f
+		int[] args = blocks.getBlocks(); // width, height, yPos, ySizeBlocks
 		int blockWidth = xSize/args[0];
-		int blockHeight = ySize/(args[3]*args[1]);
+		int blockHeight = args[3]/args[1];
 		int yPos = args[2];
 		
 		boolean[][] blocksPattern = blocks.getBlocksPattern();
