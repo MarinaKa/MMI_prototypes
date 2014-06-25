@@ -1,7 +1,5 @@
 package game_prototype;
 
-import java.awt.Component;
-
 public class Blocks {
 	
 	private int xNumBlocks;
@@ -52,6 +50,10 @@ public class Blocks {
 		else if (y>=2 && y<3) yLoc = 2;
 		else if (y>=3 && y<4) yLoc = 3;
 		else yLoc = 4;
+		
+		if (xLoc < 0 || xLoc > xNumBlocks) {
+			return false;
+		}
 		
 		if(blocks[yLoc][xLoc])
 		{

@@ -43,7 +43,7 @@ public class StartFrame implements ActionListener {
 		serverThread = new ServerThread(new NetworkListener(this, c));
 		serverThread.start();
 	}
-
+	
 	public JFrame getFrame() {
 		return frame;
 	}
