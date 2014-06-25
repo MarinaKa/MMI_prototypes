@@ -19,7 +19,6 @@ public class GameController extends JPanel{
 	
 	private GameFrame gameF = null;
 	private static GameController c;
-	private static StartFrame s;
 
 	private Paddle paddle;
 	private Ball ball;
@@ -38,7 +37,7 @@ public class GameController extends JPanel{
 	public static void main(String[] args) throws IOException
 	{
 		c = new GameController();
-		s = new StartFrame(c);
+		new StartFrame(c);
 
 	}
 	
@@ -96,7 +95,7 @@ public class GameController extends JPanel{
 		myTimer.cancel();
 		myTimer.purge();
 		gameF.dispose();
-		s = new StartFrame(c);
+		new EndFrame(c);
 	}
 	
 	private void checkPaddleHit() {
