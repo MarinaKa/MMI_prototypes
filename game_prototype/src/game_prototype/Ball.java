@@ -46,8 +46,8 @@ public class Ball {
 	private void setAngle() {
 		int xFlag = getFlag(xDir);
 		int yFlag = getFlag(yDir);
-		xDir = (int) Math.ceil(Math.random() * 4 + 5) * xFlag;
-		yDir = (int) Math.ceil(Math.random() * 4 + 5) * yFlag;
+		xDir = (int) Math.ceil(Math.random() * 4 + 5) * xFlag/2;
+		yDir = (int) Math.ceil(Math.random() * 4 + 5) * yFlag/2;
 	}
 	
 	private int getFlag(int n) {

@@ -33,19 +33,25 @@ public class Blocks {
 	
 	public boolean checkHit(int ballX, int ballY) {
 		
-		if(ballY < yStartPos || ballY > yStartPos + ySize)
+		if(ballY <= yStartPos || ballY >= yStartPos + ySize)
 		{
 			return false;
 		}
 		
-		float blockxNumBlocks = xSize/xNumBlocks;
-		float x = ballX/blockxNumBlocks;
+		float blockXSize = xSize/xNumBlocks;
+		float x = ballX/blockXSize;
 		
-		float blockyNumBlocks = ySize/yNumBlocks;
-		float y = (ballY-yStartPos)/blockyNumBlocks;
+		float blockYSize = ySize/yNumBlocks;
+		float y = (ballY-yStartPos)/blockYSize-1;
 		
 		int xLoc = (int) Math.floor(x);
-		int yLoc = (int) Math.floor(y);
+		int yLoc;
+		
+		if (y<1) yLoc = 0;
+		else if (y>=1 && y<2) yLoc = 1;
+		else if (y>=2 && y<3) yLoc = 2;
+		else if (y>=3 && y<4) yLoc = 3;
+		else yLoc = 4;
 		
 		if(blocks[yLoc][xLoc])
 		{

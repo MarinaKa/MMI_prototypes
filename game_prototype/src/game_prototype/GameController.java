@@ -72,7 +72,7 @@ public class GameController extends JPanel{
 		
 		if(paused) {
 			myTimer = new Timer();
-			myTimer.scheduleAtFixedRate(new ScheduleTask(), 0, 50);
+			myTimer.scheduleAtFixedRate(new ScheduleTask(), 0, 20);
 			paused = false;
 		}
 		else {
